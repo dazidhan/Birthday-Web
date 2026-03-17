@@ -1,0 +1,261 @@
+html {
+    scroll-behavior: smooth; /* Membuat efek scroll yang halus saat tombol diklik */
+}
+/* --- Variabel Warna & Font --- */
+:root {
+    --blue-color: #6b95c6;
+    --dark-text: #222222;
+    --bg-light: #ffffff;
+    --font-ui: 'Poppins', sans-serif;
+    --font-script: 'Caveat', cursive;
+    --font-bold: 'Oswald', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e5e5e5; /* Background gelap di luar poster */
+    font-family: var(--font-ui);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container utama (bertindak sebagai kanvas poster) */
+.poster-container {
+    width: 100%;
+    max-width: 450px; /* Lebar maksimal menyerupai HP/Poster */
+    background-color: var(--bg-light);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px 35px 25px;
+    min-height: 850px;
+}
+
+/* --- Header --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    z-index: 20;
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-icon .bar {
+    width: 22px;
+    height: 3px;
+    background-color: var(--blue-color);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.menu-icon:hover .bar {
+    background-color: var(--dark-text);
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #b0b0b0;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+nav a.active {
+    color: var(--blue-color);
+    border-bottom: 2px solid var(--blue-color);
+    padding-bottom: 4px;
+}
+
+.spacer { width: 32px; } /* Penyeimbang flexbox header */
+
+/* --- Bagian Judul --- */
+.title-section {
+    top: 10px;
+    position: relative;
+    z-index: 5;
+}
+
+.happy-text {
+    font-family: var(--font-script);
+    font-size: 46px;
+    color: var(--dark-text);
+    position: absolute;
+    top: -30px;
+    left: 5px;
+    z-index: 2;
+    transform: rotate(-3deg);
+}
+
+.birthday-text {
+    font-family: var(--font-bold);
+    font-size: 85px;
+    line-height: 1;
+    color: var(--blue-color);
+    margin-left: -3px;
+    letter-spacing: -1px;
+}
+
+.date-text {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-top: 5px;
+    color: var(--dark-text);
+}
+
+/* --- Area Konten (Foto & Nama) --- */
+.content-area {
+    position: relative;
+    flex-grow: 1;
+    margin-top: 20px;
+    height: 600px;
+}
+
+/* Foto-foto kecil di background */
+.bg-img {
+    position: absolute;
+    border-radius: 25px; /* Rounded corner */
+    overflow: hidden;
+    opacity: 0.7; /* Efek transparansi sedikit */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.bg-img:hover {
+    transform: scale(1.08) translateY(-5px);
+    opacity: 1;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    z-index: 15; /* Maju saat dihover */
+}
+
+.bg-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Posisi spesifik foto kecil */
+.img-left {
+    width: 130px; height: 190px;
+    top: 40px; left: -10px;
+    
+}
+.img-right-top {
+    width: 120px; height: 180px;
+    top: 90px; right: -5px;
+}
+.img-right-bottom {
+    width: 115px; height: 160px;
+    bottom: 90px; right: -5px;
+}
+
+/* Teks Nama Bawah */
+.name-text {
+    position: absolute;
+    bottom: 20px;
+    left: -5px;
+    font-family: var(--font-bold);
+    font-size: 65px;
+    line-height: 0.95;
+    color: var(--blue-color);
+    z-index: 999; /* Di bawah foto utama */
+}
+
+/* Foto Utama (Center) */
+.main-image {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 620px;
+    width: 350px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    
+    /* Kombinasi 2 drop-shadow untuk efek kedalaman ekstra */
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3)) 
+            drop-shadow(0px 35px 45px rgba(0, 0, 0, 0.45));
+            
+    transition: transform 0.3s;
+}
+
+.main-image img {
+    height: 100%;
+    width: 90%;
+    object-fit: cover; /* Gunakan 'contain' jika gambar asli sudah berupa PNG tanpa background */
+}
+
+.main-image img.placeholder-main {
+    border-radius: 20px; /* Hapus baris ini jika sudah menggunakan PNG tanpa background */
+}
+
+/* --- Footer --- */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 20px;
+    z-index: 20;
+}
+
+.ig-handle {
+    font-size: 11px;
+    color: #777;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.ig-handle:hover {
+    color: var(--blue-color);
+}
+
+/* Efek titik-titik modern di kanan bawah */
+.dots-pattern {
+    width: 120px;
+    height: 12px;
+    background-image: radial-gradient(var(--blue-color) 35%, transparent 35%);
+    background-size: 10px 10px;
+    background-position: 0 0;
+}
+
+/* --- Responsive Layout untuk layar HP kecil --- */
+@media (max-width: 480px) {
+    .poster-container {
+        min-height: 100vh; /* Memenuhi layar jika di HP */
+        border-radius: 0;
+    }
+    .birthday-text { font-size: 18vw; }
+    .happy-text { font-size: 10vw; }
+    .name-text { font-size: 13vw; }
+    .main-image { height: 130vw; width: 80vw; }
+    .img-left { width: 30vw; height: 45vw; }
+    .img-right-top { width: 25vw; height: 35vw; }
+    .img-right-bottom { width: 25vw; height: 35vw; }
+}
+
